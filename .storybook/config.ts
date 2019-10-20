@@ -4,7 +4,7 @@ import requireContext from 'require-context.macro';
 import '../src/App.css';
 
 
-const req = requireContext('../src', true, /\.stories\.tsx$/);
+const req = requireContext('../src', true, /storybook\/.+\.tsx$/);
 
 function loadStories() {
     req.keys().forEach(req);
