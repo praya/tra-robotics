@@ -1,0 +1,83 @@
+@font-face {
+  font-family: 'Lab Grotesque';
+  font-style: normal;
+  font-weight: 900;
+  src: local('Lab Grotesque'), url(LabGrotesque-Black.otf);
+}
+
+@font-face {
+  font-family: 'Lab Grotesque';
+  font-style: italic;
+  font-weight: 900;
+  src: local('Lab Grotesque'), url(LabGrotesque-BlackItalic.otf);
+}
+
+@font-face {
+  font-family: 'Lab Grotesque';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Lab Grotesque'), url(LabGrotesque-Bold.otf);
+}
+
+@font-face {
+  font-family: 'Lab Grotesque';
+  font-style: italic;
+  font-weight: 700;
+  src: local('Lab Grotesque'), url(LabGrotesque-BoldItalic.otf);
+}
+
+@font-face {
+  font-family: 'Lab Grotesque';
+  font-style: italic;
+  font-weight: normal;
+  src: local('Lab Grotesque'), url(LabGrotesque-Italic.otf);
+}
+
+@font-face {
+  font-family: 'Lab Grotesque';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Lab Grotesque'), url(LabGrotesque-Light.otf);
+}
+
+@font-face {
+  font-family: 'Lab Grotesque';
+  font-style: italic;
+  font-weight: 300;
+  src: local('Lab Grotesque'), url(LabGrotesque-LightItalic.otf);
+}
+
+@font-face {
+  font-family: 'Lab Grotesque';
+  font-style: normal;
+  font-weight: 500;
+  src: local('Lab Grotesque'), url(LabGrotesque-Medium.otf);
+}
+
+@font-face {
+  font-family: 'Lab Grotesque';
+  font-style: italic;
+  font-weight: 500;
+  src: local('Lab Grotesque'), url(LabGrotesque-MediumItalic.otf);
+}
+
+@font-face {
+  font-family: 'Lab Grotesque';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Lab Grotesque'), url(LabGrotesque-Regular.otf);
+}
+
+@font-face {
+  font-family: 'Lab Grotesque';
+  font-style: normal;
+  font-weight: 100;
+  src: local('Lab Grotesque'), url(LabGrotesque-Thin.otf);
+}
+
+@font-face {
+  font-family: 'Lab Grotesque';
+  font-style: italic;
+  font-weight: 100;
+  src: local('Lab Grotesque'), url(LabGrotesque-ThinItalic.otf);
+}
