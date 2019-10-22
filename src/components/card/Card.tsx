@@ -6,7 +6,9 @@ import { AssemblyProcessItem } from '../../services/api';
 import { Badge } from './badge/Badge';
 
 
-const Container = styled.div`
+const Container = styled.a`
+    display: block;
+    color: #000000;
     position: relative;
     min-width: 600px;
     white-space: nowrap;
@@ -14,10 +16,18 @@ const Container = styled.div`
     background: #FFFFFF;
     box-shadow: 0 1px 4px rgba(54, 65, 76, 0.15);
     border-radius: 4px;
+    transition: box-shadow 0.2s ease-in-out;
+    
+    :hover {
+        box-shadow: 0 6px 12px rgba(54, 65, 76, 0.15);
+    }
+    
+    :active {
+        box-shadow: 0 3px 6px rgba(54, 65, 76, 0.15);
+    }
 `;
 
-
-export interface CardProps {
+export type CardProps = React.HTMLAttributes<HTMLAnchorElement> & {
     item: AssemblyProcessItem;
 }
 
@@ -38,8 +48,8 @@ const StyledInfo = styled(Info)`
     display: inline-block;
 `;
 
-export const Card: React.FC<CardProps> = ({ item }) => (
-    <Container>
+export const Card: React.FC<CardProps> = ({ item, ...attrs }) => (
+    <Container {...attrs} href={`#item-${item._id}`}>
         <StyledBadge type={item.assemblyStatus} />
         <StyledPhoto src={item.img} />
         <StyledInfo title={item.title} reviewStatus={item.reviewStatus} updatedAt={item.updated} />
