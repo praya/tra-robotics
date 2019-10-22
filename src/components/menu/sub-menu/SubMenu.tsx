@@ -12,6 +12,7 @@ const Title = styled.div`
 `;
 
 const Item = styled.div<{ selected: boolean }>`
+    cursor: pointer;
     height: 24px;
     margin: 8px 0 8px 1px;
     font-family: Lab Grotesque, sans-serif;
@@ -20,6 +21,14 @@ const Item = styled.div<{ selected: boolean }>`
     color: ${({ selected }) => selected ? 'rgba(0, 0, 0, 1)' : 'rgba(0, 0, 0, 0.5)'};
     padding-left: 12px;
     border-left: ${({ selected }) => selected ? '1px solid #000000;' : '1px solid transparent;'};
+
+    :hover {
+        color: rgba(0, 0, 0, 0.75);
+    }
+
+    :active {
+        color: rgba(0, 0, 0, 1);
+    }
 `;
 
 const makeClickHandler = (item: SubMenuItem) => () => {
