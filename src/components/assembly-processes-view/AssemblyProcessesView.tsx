@@ -53,7 +53,7 @@ export const AssemblyProcessesView: React.FC<AssemblyProcessesViewProps> =
                     onPriorityChange={onPriorityChange}
                 />
 
-                {items.map((item) => <StyledCard item={item} />)}
+                {items.map((item) => <StyledCard key={item._id} item={item} />)}
 
             </Content>
 

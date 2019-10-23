@@ -13,15 +13,13 @@ storiesOf('Toggle', module)
                 { id: 'old', title: 'Old first' },
             ];
 
-            const [state, setState] = React.useState(states[0]);
-
             return (
                 <Compare mockup={mockupImage}>
                     <div style={{ margin: '2px 0 0 4px' }}>
                         <Toggle
                             states={states}
-                            active={state.id}
-                            onStateChange={setState}
+                            active={states[0].id}
+                            onStateChange={console.info}
                         />
                     </div>
                 </Compare>

@@ -1,8 +1,9 @@
 import { SubMenu } from '../../menu/Menu';
 
 
-export const filters: SubMenu[] =[
+export const filters: SubMenu[] = [
     {
+        id: 'assembly',
         title: 'Assembly',
         items: [
             { id: 'any', title: 'Any', selected: true },
@@ -11,6 +12,7 @@ export const filters: SubMenu[] =[
         ]
     },
     {
+        id: 'review',
         title: 'Review',
         items: [
             { id: 'any', title: 'Any', selected: true },

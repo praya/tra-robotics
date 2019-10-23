@@ -25,6 +25,7 @@ const StyledSubMenu = styled(SubMenu)`
 `;
 
 export interface SubMenu {
+    id: string;
     title: string;
     items: Array<SubMenuItem>;
 }
@@ -39,8 +40,8 @@ export const Menu: React.FC<BadgeProps> = ({ title, menus, ...attrs }) => (
 
         <Title>{title}</Title>
 
-        {menus.map(subMenu => (
-            <StyledSubMenu title={subMenu.title} items={subMenu.items} />
+        {menus.map((subMenu) => (
+            <StyledSubMenu key={subMenu.id} title={subMenu.title} items={subMenu.items} />
         ))}
 
     </Container>
