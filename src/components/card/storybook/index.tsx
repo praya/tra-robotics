@@ -2,15 +2,17 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { Card } from '../Card';
 import { Compare } from '../../utils/Compare';
-import mockupImage from './mockup.png';
+import mockupDefaultImage from './mockup-default.png';
+import mockupHoverImage from './mockup-hover.png';
 import photoImage from '../photo.png';
+import moment from 'moment';
 
 
 storiesOf('Card', module)
-    .add('Card',
+    .add('Default',
         () => (
-            <Compare mockup={mockupImage}>
-                <div style={{ margin: '3px 0 0 4px' }}>
+            <Compare mockup={mockupDefaultImage}>
+                <div style={{ margin: '6px 0 0 12px', width: '1136px' }}>
                     <Card item={{
                         '_id': '5d4193af0717dd5261aac038',
                         'img': photoImage,
@@ -18,7 +20,24 @@ storiesOf('Card', module)
                         'assemblyStatus': 'IN_REVIEW',
                         'reviewStatus': 'DRAFT',
                         'title': 'S6: Center Structure',
-                        'updated': '2018-12-08T02:25:07 -03:00'
+                        'updated': moment().subtract(20, 'minutes').toISOString()
+                    }} />
+                </div>
+            </Compare>
+        )
+    )
+    .add('Hover',
+        () => (
+            <Compare mockup={mockupHoverImage}>
+                <div style={{ margin: '6px 0 0 12px', width: '1136px' }}>
+                    <Card data-state="hover" item={{
+                        '_id': '5d4193af0717dd5261aac038',
+                        'img': photoImage,
+                        'age': 28,
+                        'assemblyStatus': 'IN_REVIEW',
+                        'reviewStatus': 'SIMULATION_FINISHED',
+                        'title': 'S6: Center Structure v2.0',
+                        'updated': '2019-04-20 15:00:00'
                     }} />
                 </div>
             </Compare>

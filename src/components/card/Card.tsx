@@ -4,6 +4,7 @@ import { Info } from './info/Info';
 import { Photo } from './Photo';
 import { AssemblyProcessItem } from '../../services/api';
 import { Badge } from './badge/Badge';
+import { Controls } from './controls/Controls';
 
 
 const Container = styled.a`
@@ -18,12 +19,27 @@ const Container = styled.a`
     border-radius: 4px;
     transition: box-shadow 0.2s ease-in-out;
     
-    :hover {
-        box-shadow: 0 6px 12px rgba(54, 65, 76, 0.15);
+    .controls {
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
     }
     
+    &[data-state="hover"],
+    :hover {
+        box-shadow: 0 6px 12px rgba(54, 65, 76, 0.15);
+        
+        .controls {
+            opacity: 1;        
+        }
+    }
+    
+    &[data-state="active"],
     :active {
         box-shadow: 0 3px 6px rgba(54, 65, 76, 0.15);
+
+        .controls {
+            opacity: 1;        
+        }
     }
 `;
 
@@ -48,10 +64,14 @@ const StyledInfo = styled(Info)`
     display: inline-block;
 `;
 
+
 export const Card: React.FC<CardProps> = ({ item, ...attrs }) => (
-    <Container {...attrs} href={`#item-${item._id}`}>
+    <Container href={`#item-${item._id}`} {...attrs}>
         <StyledBadge type={item.assemblyStatus} />
         <StyledPhoto src={item.img} />
         <StyledInfo title={item.title} reviewStatus={item.reviewStatus} updatedAt={item.updated} />
+
+        <Controls className="controls" />
+
     </Container>
 );
