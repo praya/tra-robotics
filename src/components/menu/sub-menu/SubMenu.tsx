@@ -39,7 +39,7 @@ const makeClickHandler = (item: SubMenuItem) => () => {
 
 export interface SubMenuItem {
     id: string;
-    title: string;
+    name: string;
     selected?: boolean;
 
     onClick?(item: SubMenuItem): void;
@@ -60,7 +60,7 @@ export const SubMenu: React.FC<SubMenuProps> = ({ title, items, ...attrs }) => (
                 onClick={makeClickHandler(item)}
                 selected={!!item.selected}
             >
-                {item.title}
+                {item.name}
             </Item>
         ))}
     </div>

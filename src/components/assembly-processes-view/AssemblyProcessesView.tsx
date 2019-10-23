@@ -6,6 +6,7 @@ import { AssemblyProcessItem } from '../../services/api';
 import { Layout } from '../layout/Layout';
 import { PageHeader } from './PageHeader/PageHeader';
 import { State } from '../toggle/Toggle';
+import { Filter } from '../../services/filtering/Filter';
 
 
 const StyledMenu = styled(Menu)`
@@ -33,7 +34,7 @@ const Content = styled.div`
 export type AssemblyProcessesViewProps = React.HTMLAttributes<HTMLDivElement> & {
     priorities: [State, State];
     priority: string;
-    filters: any[];
+    filters: Filter[];
     items: AssemblyProcessItem[];
     onPriorityChange(priority: State): void;
 }
