@@ -3,6 +3,9 @@ import styled from 'styled-components';
 
 
 const ToggleButton = styled.button`
+    position: sticky;
+    top: 0;
+    left: 0;
     outline: none;
     border: 1px solid #dddddd;
     border-radius: 3px;
