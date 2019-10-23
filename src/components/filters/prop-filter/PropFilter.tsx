@@ -31,34 +31,34 @@ const Item = styled.div<{ selected: boolean }>`
     }
 `;
 
-const makeClickHandler = (item: SubMenuItem) => () => {
+const makeClickHandler = (item: FilterOption) => () => {
     if (item.onClick) {
         item.onClick(item);
     }
 };
 
-export interface SubMenuItem {
+export interface FilterOption {
     id: string;
     name: string;
-    selected?: boolean;
 
-    onClick?(item: SubMenuItem): void;
+    onClick?(item: FilterOption): void;
 }
 
-export type SubMenuProps = React.HTMLAttributes<HTMLDivElement> & {
+export type PropFilterProps = React.HTMLAttributes<HTMLDivElement> & {
     title: string;
-    items: Array<SubMenuItem>;
+    options: Array<FilterOption>;
+    selected: string | undefined;
 }
 
-export const SubMenu: React.FC<SubMenuProps> = ({ title, items, ...attrs }) => (
+export const PropFilter: React.FC<PropFilterProps> = ({ title, options, selected, ...attrs }) => (
     <div {...attrs}>
         <Title>{title}</Title>
 
-        {items.map(item => (
+        {options.map(item => (
             <Item
                 key={item.id}
                 onClick={makeClickHandler(item)}
-                selected={!!item.selected}
+                selected={item.id === selected}
             >
                 {item.name}
             </Item>

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { Menu } from '../menu/Menu';
+import { Filters } from '../filters/Filters';
 import { Card } from '../card/Card';
 import { AssemblyProcessItem } from '../../services/api';
 import { Layout } from '../layout/Layout';
@@ -9,7 +9,7 @@ import { State } from '../toggle/Toggle';
 import { Filter } from '../../services/filtering/Filter';
 
 
-const StyledMenu = styled(Menu)`
+const StyledFilters = styled(Filters)`
     position: sticky;
     top: 20px;
     box-sizing: border-box;
@@ -43,7 +43,7 @@ export const AssemblyProcessesView: React.FC<AssemblyProcessesViewProps> =
     ({ filters, priorities, priority, onPriorityChange, items, ...attrs }) => (
         <Layout {...attrs}>
 
-            <StyledMenu title="Filter" menus={filters} />
+            <StyledFilters title="Filter" menus={filters} />
 
             <Content>
 

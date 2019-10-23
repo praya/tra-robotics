@@ -1,12 +1,13 @@
-import { Filter } from './filtering/Filter';
+import { PropFilterConfig } from '../components/filters/Filters';
 
 
-export const filters: Array<Filter> = [
+export const filters: Array<PropFilterConfig> = [
     {
         id: 'assembly',
         name: 'Assembly',
+        selected: 'any',
         items: [
-            { id: 'any', name: 'Any', selected: true },
+            { id: 'any', name: 'Any' },
             { id: 'in_review', name: 'In Review' },
             { id: 'review_finished', name: 'Review Finished' },
         ]
@@ -14,8 +15,9 @@ export const filters: Array<Filter> = [
     {
         id: 'review',
         name: 'Review',
+        selected: 'any',
         items: [
-            { id: 'any', name: 'Any', selected: true },
+            { id: 'any', name: 'Any' },
             { id: 'draft', name: 'Draft' },
             { id: 'solved', name: 'Solved' },
             { id: 'simulation_requested', name: 'Simulation Requested' },
