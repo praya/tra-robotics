@@ -1,6 +1,7 @@
 import { ajax } from 'rxjs/ajax';
 import { Query } from './Query';
 import { map } from 'rxjs/operators';
+import { itemsUrl } from '../config';
 
 
 const buildUrl = (base: string, params: { [key: string]: any }) => {
@@ -23,7 +24,7 @@ const configToSearchParams = (query: Query) => ({
 
 
 export const getItems = (query: Query) => ajax(buildUrl(
-    'http://localhost:4001/items',
+    itemsUrl,
     configToSearchParams(query)
 )).pipe(map(({ xhr, response }) => ({
     total: parseInt(xhr.getResponseHeader('x-total-count') || '') || 0,

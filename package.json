@@ -6,10 +6,11 @@
     "json-server": "^0.15.1"
   },
   "scripts": {
-    "server": "json-server -w -p=4001 assembly-process-data.json",
+    "serve": "json-server -w -p=4001 assembly-process-data.json",
     "storybook": "start-storybook -p 4002 -s public",
     "build-storybook": "build-storybook -s public",
-    "start": "react-scripts start",
+    "start": "concurrently \"yarn serve\" \"yarn start-react\" \"yarn storybook\"",
+    "start-react": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
