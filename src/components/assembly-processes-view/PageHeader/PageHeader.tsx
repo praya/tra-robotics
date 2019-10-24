@@ -53,25 +53,30 @@ export type PageHeaderProps = React.HTMLAttributes<HTMLDivElement> & {
     count: number;
     priority: string;
     priorities: [State, State];
-    onPriorityChange(priority: State): void;
+    onPriorityChange(priority: string): void;
+    onSearchQueryChange(query: string): void;
 };
 
-export const PageHeader: React.FC<PageHeaderProps> = ({ count, priority, priorities, onPriorityChange, ...attrs }) => (
-    <Container {...attrs}>
-        <Title>Assembly Processes</Title>
-        <Badge>{count}</Badge>
+export const PageHeader: React.FC<PageHeaderProps> =
+    ({ count, priority, priorities, onPriorityChange, onSearchQueryChange, ...attrs }) => (
+        <Container {...attrs}>
+            <Title>Assembly Processes</Title>
+            <Badge>{count}</Badge>
 
-        <RightContainer>
-            <ToggleLabel>Show</ToggleLabel>
+            <RightContainer>
+                <ToggleLabel>Show</ToggleLabel>
 
-            <StyledToggle
-                active={priority}
-                states={priorities}
-                onStateChange={onPriorityChange}
-            />
+                <StyledToggle
+                    active={priority}
+                    states={priorities}
+                    onStateChange={onPriorityChange}
+                />
 
-            <StyledSearch placeholder="Search by assembly name" />
-        </RightContainer>
+                <StyledSearch
+                    onChange={({ target: { value } }) => onSearchQueryChange(value)}
+                    placeholder="Search by assembly name"
+                />
+            </RightContainer>
 
-    </Container>
-);
+        </Container>
+    );

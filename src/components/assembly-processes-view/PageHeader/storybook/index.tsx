@@ -15,12 +15,13 @@ storiesOf('PageHeader', module)
     .add('Default',
         () => (
             <Compare mockup={mockupImage}>
-                <div style={{ width: '1136px' }}>
+                <div style={{ width: '1136px', marginTop: '-18px' }}>
                     <PageHeader
                         count={220}
                         priority={priorities[0].id}
                         priorities={priorities}
                         onPriorityChange={console.info}
+                        onSearchQueryChange={console.info}
                     />
                 </div>
             </Compare>

@@ -11,7 +11,7 @@ const Title = styled.div`
     color: #98989D;
 `;
 
-const Item = styled.div<{ selected: boolean }>`
+const Option = styled.div<{ selected: boolean }>`
     cursor: pointer;
     height: 24px;
     margin: 8px 0 8px 1px;
@@ -31,37 +31,31 @@ const Item = styled.div<{ selected: boolean }>`
     }
 `;
 
-const makeClickHandler = (item: FilterOption) => () => {
-    if (item.onClick) {
-        item.onClick(item);
-    }
-};
 
 export interface FilterOption {
-    id: string;
+    value: string;
     name: string;
-
-    onClick?(item: FilterOption): void;
 }
 
 export type PropFilterProps = React.HTMLAttributes<HTMLDivElement> & {
     title: string;
     options: Array<FilterOption>;
     selected: string | undefined;
+    onSelectFilter(option: string): void;
 }
 
-export const PropFilter: React.FC<PropFilterProps> = ({ title, options, selected, ...attrs }) => (
+export const PropFilter: React.FC<PropFilterProps> = ({ title, options, selected, onSelectFilter, ...attrs }) => (
     <div {...attrs}>
         <Title>{title}</Title>
 
-        {options.map(item => (
-            <Item
-                key={item.id}
-                onClick={makeClickHandler(item)}
-                selected={item.id === selected}
+        {options.map(option => (
+            <Option
+                key={option.value}
+                onClick={() => onSelectFilter(option.value)}
+                selected={option.value === selected}
             >
-                {item.name}
-            </Item>
+                {option.name}
+            </Option>
         ))}
     </div>
 );

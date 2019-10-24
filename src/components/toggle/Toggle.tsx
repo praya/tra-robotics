@@ -11,7 +11,7 @@ const Container = styled.div`
     height: 32px;
     background: #e1e5e6;
     border-radius: 21px;
-    
+    user-select: none;
     
     > .pill {
         top: 0;
@@ -63,15 +63,13 @@ export interface State {
 export type ToggleProps = React.HTMLAttributes<HTMLDivElement> & {
     active: string;
     states: [State, State];
-    onStateChange(state: State): void;
+    onStateChange(id: string): void;
 }
 
 export const Toggle: React.FC<ToggleProps> = ({ active, states: [left, right], onStateChange, ...attrs }) => (
     <Container
         data-state={active === left.id ? 'left' : 'right'}
-        onClick={() => {
-            onStateChange(active === left.id ? right : left)
-        }}
+        onClick={() => onStateChange(active === left.id ? right.id : left.id)}
         {...attrs}
     >
         <Pill className="pill" />

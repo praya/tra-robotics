@@ -5,6 +5,7 @@ import logoImage from './logo.png';
 
 
 const CenteredContainer = styled.div`
+    min-width: 1224px;
     max-width: 1520px;
     padding: 24px 10px;
     margin: auto;

@@ -44,7 +44,6 @@ const Value = styled.div<{ color?: string }>`
 `;
 
 
-
 const statuses: { [key in ReviewStatus]: string } = {
     'DRAFT': 'Draft',
     'SIMULATION_NEGATIVE': 'Simulation Negative',
@@ -71,7 +70,7 @@ export type InfoProps = React.HTMLAttributes<HTMLDivElement> & {
 }
 
 const formatDate = (date: string) => {
-    const momentDate = moment(date);
+    const momentDate = moment(date, 'YYYY-MM-DD[T]HH:mm:ssZ');
     const isToday = momentDate.isSame(new Date(), 'day');
 
     return isToday

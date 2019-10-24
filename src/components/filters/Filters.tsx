@@ -27,16 +27,18 @@ const StyledPropFilter = styled(PropFilter)`
 export interface PropFilterConfig {
     id: string;
     name: string;
-    selected: string;
     items: Array<FilterOption>;
 }
 
 export type FiltersProps = React.HTMLAttributes<HTMLDivElement> & {
     title: string;
     filters: Array<PropFilterConfig>;
+    activeOptions: { [key: string]: string };
+    onSelectFilter(prop: string, selected: string): void;
 }
 
-export const Filters: React.FC<FiltersProps> = ({ title, filters, ...attrs }) => (
+
+export const Filters: React.FC<FiltersProps> = ({ title, filters, activeOptions, onSelectFilter, ...attrs }) => (
     <Container {...attrs}>
 
         <Title>{title}</Title>
@@ -45,8 +47,9 @@ export const Filters: React.FC<FiltersProps> = ({ title, filters, ...attrs }) =>
             <StyledPropFilter
                 key={filter.id}
                 title={filter.name}
-                selected={filter.selected}
+                selected={activeOptions[filter.id]}
                 options={filter.items}
+                onSelectFilter={(option: string) => onSelectFilter(filter.id, option)}
             />
         ))}
 

@@ -1,28 +1,37 @@
 import { PropFilterConfig } from '../components/filters/Filters';
+import { FilterOption } from '../components/filters/prop-filter/PropFilter';
+
+
+export const assemblyOptions: Array<FilterOption> = [
+    { value: '', name: 'Any' },
+    { value: 'IN_REVIEW', name: 'In Review' },
+    { value: 'REVIEW_FINISHED', name: 'Review Finished' },
+];
+
+export const reviewOptions: Array<FilterOption> = [
+    { value: '', name: 'Any' },
+    { value: 'DRAFT', name: 'Draft' },
+    { value: 'SOLVED', name: 'Solved' },
+    { value: 'SIMULATION_REQUESTED', name: 'Simulation Requested' },
+    { value: 'SIMULATION_POSITIVE', name: 'Simulation Positive' },
+    { value: 'SIMULATION_NEGATIVE', name: 'Simulation Negative' },
+];
+
+
+export const assemblyFilter: PropFilterConfig = {
+    id: 'assembly',
+    name: 'Assembly',
+    items: assemblyOptions,
+};
+
+export const reviewFilter: PropFilterConfig = {
+    id: 'review',
+    name: 'Review',
+    items: reviewOptions,
+};
 
 
 export const filters: Array<PropFilterConfig> = [
-    {
-        id: 'assembly',
-        name: 'Assembly',
-        selected: 'any',
-        items: [
-            { id: 'any', name: 'Any' },
-            { id: 'in_review', name: 'In Review' },
-            { id: 'review_finished', name: 'Review Finished' },
-        ]
-    },
-    {
-        id: 'review',
-        name: 'Review',
-        selected: 'any',
-        items: [
-            { id: 'any', name: 'Any' },
-            { id: 'draft', name: 'Draft' },
-            { id: 'solved', name: 'Solved' },
-            { id: 'simulation_requested', name: 'Simulation Requested' },
-            { id: 'simulation_positive', name: 'Simulation Positive' },
-            { id: 'simulation_negative', name: 'Simulation Negative' },
-        ]
-    }
+    assemblyFilter,
+    reviewFilter,
 ];

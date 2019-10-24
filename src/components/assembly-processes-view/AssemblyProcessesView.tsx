@@ -1,12 +1,15 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { Filters } from '../filters/Filters';
-import { Card } from '../card/Card';
 import { AssemblyProcessItem } from '../../services/api';
 import { Layout } from '../layout/Layout';
 import { PageHeader } from './PageHeader/PageHeader';
 import { State } from '../toggle/Toggle';
-import { Filter } from '../../services/filtering/Filter';
+import { assemblyFilter, reviewFilter } from '../../services/filters';
+import { fromEvent } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
+import { getDynamicItems } from './getDynamicItems';
+import { Cards } from './Cards';
 
 
 const StyledFilters = styled(Filters)`
@@ -18,10 +21,6 @@ const StyledFilters = styled(Filters)`
     width: 240px;
 `;
 
-const StyledCard = styled(Card)`
-    margin-bottom: 12px;
-`;
-
 const Content = styled.div`
     box-sizing: border-box;
     padding: 0 96px 0 48px;
@@ -31,32 +30,79 @@ const Content = styled.div`
 `;
 
 
-export type AssemblyProcessesViewProps = React.HTMLAttributes<HTMLDivElement> & {
-    priorities: [State, State];
-    priority: string;
-    filters: Filter[];
-    items: AssemblyProcessItem[];
-    onPriorityChange(priority: State): void;
-}
+export type AssemblyProcessesViewProps = React.HTMLAttributes<HTMLDivElement> & {}
+
+const priorities: [State, State] = [
+    { id: 'updated', title: 'Latest first' },
+    { id: 'age', title: 'Old first' },
+];
 
 export const AssemblyProcessesView: React.FC<AssemblyProcessesViewProps> =
-    ({ filters, priorities, priority, onPriorityChange, items, ...attrs }) => (
-        <Layout {...attrs}>
+    ({ ...attrs }) => {
+        React.useEffect(() => {
+            const subscription = fromEvent(window, 'scroll').pipe(
+                debounceTime(1000)
+            ).subscribe(() => {
 
-            <StyledFilters title="Filter" menus={filters} />
+            });
+            return () => subscription.unsubscribe();
+        }, []);
 
-            <Content>
+        const [searchQuery, setSearchQuery] = React.useState('');
 
-                <PageHeader
-                    count={220}
-                    priorities={priorities}
-                    priority={priority}
-                    onPriorityChange={onPriorityChange}
+        const [activeOptions, setActiveOptions] = React.useState({
+            [assemblyFilter.id]: assemblyFilter.items[0].value,
+            [reviewFilter.id]: reviewFilter.items[0].value,
+        });
+
+        const handleOnSelectFilter = (prop: string, option: string) => {
+            setActiveOptions({ ...activeOptions, [prop]: option });
+        };
+
+        const [priority, setPriority] = React.useState<string>(priorities[0].id);
+        const [items, setItems] = React.useState<AssemblyProcessItem[]>([]);
+        const [total, setTotal] = React.useState<number>(0);
+        const [start, setStart] = React.useState<number>(0);
+
+        React.useEffect(() => {
+            const subscription = getDynamicItems(
+                searchQuery,
+                priority,
+                activeOptions[assemblyFilter.id],
+                activeOptions[reviewFilter.id],
+            ).subscribe(({ start, end, response: { total, items } }) => {
+                console.info(`Loaded ${end - start} items (from ${start} to ${end}); total = ${total}`, items);
+                setStart(start);
+                setItems(items);
+                setTotal(total);
+            });
+            return () => subscription.unsubscribe();
+        }, [activeOptions, priority, searchQuery]);
+
+        return (
+            <Layout {...attrs}>
+
+                <StyledFilters
+                    title="Filter"
+                    filters={[assemblyFilter, reviewFilter]}
+                    activeOptions={activeOptions}
+                    onSelectFilter={handleOnSelectFilter}
                 />
 
-                {items.map((item) => <StyledCard key={item._id} item={item} />)}
+                <Content>
 
-            </Content>
+                    <PageHeader
+                        count={total}
+                        priorities={priorities}
+                        priority={priority}
+                        onPriorityChange={setPriority}
+                        onSearchQueryChange={setSearchQuery}
+                    />
 
-        </Layout>
-    );
+                    <Cards start={start} total={total} items={items} />
+
+                </Content>
+
+            </Layout>
+        );
+    };

@@ -2,9 +2,12 @@
   "name": "tra-robotics-test",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {},
+  "dependencies": {
+    "json-server": "^0.15.1"
+  },
   "scripts": {
-    "storybook": "start-storybook -p 9009 -s public",
+    "server": "json-server -w -p=4001 assembly-process-data.json",
+    "storybook": "start-storybook -p 4002 -s public",
     "build-storybook": "build-storybook -s public",
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -44,6 +47,7 @@
     "react-scripts": "3.2.0",
     "react-test-renderer": "^16.10.2",
     "require-context.macro": "^1.2.2",
+    "rxjs": "^6.5.3",
     "start-server-and-test": "^1.10.6",
     "styled-components": "^4.4.0",
     "typescript": "3.6.4"
